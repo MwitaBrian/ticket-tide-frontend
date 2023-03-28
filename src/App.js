@@ -10,26 +10,28 @@ import Details from './components/Details';
 import AuthProvider from './components/context/AuthContext';
 
 
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
 		sessionStorage.getItem("isLoggedIn") === "true"
 	);
   return (
-		<BrowserRouter>
-			<AuthProvider>
-				<Routes>
-					<Route path='/' element={<Layout isLoggedIn={isLoggedIn} />}>
-						<Route index element={<Home />} />
-						<Route path='/login' element={<Login />} />
-						<Route path='/register' element={<Register />} />
-						<Route path='/events' element={<Events />} />
-						<Route path='/details/:id' element={<Details />} />
-					</Route>
-				</Routes>
-			</AuthProvider>
-		</BrowserRouter>
-	);
+
+    <BrowserRouter >
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={<Home />}/>
+        <Route path='/login' element={<Login />}/>
+        <Route path='/register' element={<Register />}/>
+        <Route path='/events' element={<Events />}/>
+        <Route path='/details/:id' element={<Details />}/>
+        <Route path='/new' element={<New />} />
+      </Route>
+    </Routes>
+      
+    </BrowserRouter>
+  );
+
+	
 }
 
 export default App;

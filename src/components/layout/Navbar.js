@@ -39,6 +39,7 @@ function Navbar() {
 							style={{ background: "#1E90FF" }}
 							to='/new'
 						>
+
 							<li>Create</li>
 						</NavLink>
 						{isLoggedIn ? (

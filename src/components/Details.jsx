@@ -5,6 +5,7 @@ import './css/details.css'
 function Details() {
   const { id } = useParams();
   const [event, setEvent] = useState("")
+  console.log(event)
 
   useEffect(() => {
     fetch(`events/${id}`)

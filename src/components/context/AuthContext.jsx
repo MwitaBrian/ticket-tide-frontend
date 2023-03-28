@@ -9,6 +9,7 @@ export const AuthContext = createContext();
 export default function AuthProvider({children}) 
 {
     const navigate = useNavigate()
+
     const [user, setUser] = useState(null);
     // login
     const login = (email, password) =>{
@@ -77,6 +78,22 @@ export default function AuthProvider({children})
         })
     }
 // check logged in user
+
+    useEffect(() => {
+        fetch("/loggedin", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+           
+        }
+        )
+            .then(res => res.json())
+            .then(response => {
+                setUser(response)
+             })
+    }, []);
+
 //   useEffect(() => {
 //     const userToken = sessionStorage.getItem("jwtToken");
 //     if (userToken) {
@@ -84,7 +101,9 @@ export default function AuthProvider({children})
 //       setUser(decodedToken);
 //     }
 //   }, []);
+
 //      // Logout
+
      const logout = () =>{
           sessionStorage.clear();
              navigate("/login");

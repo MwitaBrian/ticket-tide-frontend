@@ -33,16 +33,16 @@ function Footer() {
           <div className='col-lg-3 col-sm-12'>
             <h2 className='footer-h2'>Find us on our socials</h2>
             <div >
-              <span class="bi bi-facebook" style={{padding:"5px", color:"white", fontSize:"2rem"}}></span>
-              <span class="bi bi-whatsapp green-color" style={{padding:"5px", color:"green", fontSize:"2rem"}}> </span>
-              <span class="bi bi-twitter blue-color" style={{padding:"5px", color:"blue", fontSize:"2rem"}}> </span>
-                <span class="bi bi-youtube red-color" style={{padding:"5px", color:"red", fontSize:"2rem"}}> </span>
+              <span className="bi bi-facebook" style={{padding:"5px", color:"white", fontSize:"2rem"}}></span>
+              <span className="bi bi-whatsapp green-color" style={{padding:"5px", color:"green", fontSize:"2rem"}}> </span>
+              <span className="bi bi-twitter blue-color" style={{padding:"5px", color:"blue", fontSize:"2rem"}}> </span>
+                <span className="bi bi-youtube red-color" style={{padding:"5px", color:"red", fontSize:"2rem"}}> </span>
             </div>
         </div>
       </div>
         <hr style={{ color: "#fff" }} />
         <div className='footer_at' style={{ display: 'flex', justifyContent: 'center', fontSize:"1.5rem" }}>
-  <p style={{color:"#fff"}}><i class="bi bi-shield-lock" style={{fontSize:"1.5rem"}}></i> &copy; 2023 TicketTide</p>
+  <p style={{color:"#fff"}}><i className="bi bi-shield-lock" style={{fontSize:"1.5rem"}}></i> &copy; 2023 TicketTide</p>
 </div>
         </div>
     </div>

@@ -1,38 +1,198 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  /* max-width: 1024px; */
+  margin: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  color: #fbfbff;
+  z-index: 1;
+  /* max-width: 1024px; */
+
+}
+
+.logo {
+  font-size: 30px;
+  margin-left: 0;
+}
+
+span {
+  color: blue;
+  font-weight: 900;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: flex-end;
+  width: 60%;
+}
+
+.nav-links li {
+  color: #fbfbff;
+  font-size: 20px;
+  padding: 5px 10px;
+  margin: 0 10px;
+  cursor: pointer;
+  text-transform: capitalize;
+  list-style-type: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.active {
+  border-radius: 30px;
+  border: 1px solid rgb(107, 88, 192);
+}
+
+.mobile-menu-icon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    align-items: center;
+    justify-content: center;
+    height: 6vh;
   }
+
+  .logo {
+    display: flex;
+    position: absolute;
+    top: 15px;
+    left: 5px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-links-mobile {
+    position: absolute;
+    display: block;
+    list-style: none;
+    box-shadow: rgba(50, 50, 93, 0.23) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    left: 0;
+    top: 10%;
+    transition: all 0.5s ease-in-out;
+    width: 100%;
+    background-color: white;
+    z-index: 10;
+    list-style-type: none;
+  }
+
+  .nav-links-mobile a {
+    text-decoration: none;
+  }
+
+  ul li {
+    padding: 27px 0;
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+    text-align: center;
+    color: black;
+  }
+
+
+  .mobile-menu-icon {
+    position: absolute;
+    display: block;
+    right: 20px;
+    border: none;
+    background: #131E3A;
+    color: #fbfbff;
+
+  }
+
 }
 
-.App-header {
-  background-color: #282c34;
+/* login */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
+  margin: 0;
+}
+
+form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: #f0f0f0;
 }
 
-.App-link {
-  color: #61dafb;
+
+
+input[type="email"],
+input[type="text"],
+input[type="tel"],
+input[type="password"],
+input[type="file"],
+input[type="date"] {
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button[type="submit"] {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #0062cc;
+}
+
+p {
+  margin-top: 1rem;
+}
+
+/* end of login */
+/* Footer css */
+.footer {
+  min-height: 20vh;
+}
+
+.footer-h2 {
+  color: #1E90FF;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* home component css */
+.hero-section {
+  background-image: url('./images/hero1.avif');
+  background-size: cover;
+  background-position: center;
+  height: 65vh;
+  margin-top: 60px;
 }

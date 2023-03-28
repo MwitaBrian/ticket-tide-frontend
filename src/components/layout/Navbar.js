@@ -1,20 +1,76 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState} from "react";
+import { NavLink } from "react-router-dom";
+// import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
-  return (
-    <nav className='flex flex-row flex-wrap gap-4 justify-evenly py-4 bg-blue-600 text-white'>
-      <div className='text-2xl font-semibold'>
-        <h1>TicketTide</h1>
-      </div>
-      <div className='flex gap-8 text-white font-semibold'>
-        <Link to ="/">Home</Link>
-        <Link to ="/tickets">Tickets</Link>
-        <Link to ="/">Login</Link>
-        <Link to ="/">Signup</Link>
-      </div>
-    </nav>
-  )
+  const [mobile, setMobile] = useState(false);
+  // const { user, logout } = useContext(AuthContext);
+  // console.log(user)
+  
+	return (
+		<div>
+			<nav
+				className='navbar'
+				style={{
+					background: "linear-gradient(to right, #00356B,#1D2951, #131E3A)",
+				}}
+			>
+				<div className='container'>
+					<h3
+						className='logo'
+						style={{ textTransform: "uppercase", fontWeight: "900" }}
+					>
+						Ticket-
+						<span>Tide</span>
+					</h3>
+					<ul
+						className={mobile ? "nav-links-mobile" : "nav-links"}
+						onClick={() => setMobile(false)}
+					>
+						<NavLink exact activeClassName='active' to='/'>
+							<li>Home</li>
+						</NavLink>
+						<NavLink activeClassName='active' to='/events'>
+							<li>Events</li>
+						</NavLink>
+						<NavLink
+							activeClassName='active'
+							className='mx-3'
+							style={{ background: "#1E90FF" }}
+							to='/new'
+						>
+							<li>Create</li>
+            </NavLink>
+            {/* {
+              user && user.loggedin ?
+                <>
+                  <div onClick={logout}>Logout</div>
+                </>
+                :
+                <> */}
+                  <NavLink activeClassName='active' to='/login'>
+                    <li>Login</li>
+                  </NavLink>
+                {/* </>
+            } */}
+					</ul>
+					<button
+						className='mobile-menu-icon'
+						onClick={() => setMobile(!mobile)}
+					>
+						{mobile ? (
+							<i
+								className='bi bi-x-square'
+								style={{ color: "#131E3A", fontSize: "2rem" }}
+							/>
+						) : (
+							<i className='bi bi-list' style={{ fontSize: "2rem" }} />
+						)}
+					</button>
+				</div>
+			</nav>
+		</div>
+	);
 }
 
-export default Navbar
+export default Navbar;

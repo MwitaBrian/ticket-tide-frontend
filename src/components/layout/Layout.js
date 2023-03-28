@@ -5,16 +5,14 @@ import Navbar from './Navbar'
 
 function Layout() {
   return (
-    <section className='bg-blue-700'>
-        <Navbar />
-         <div className='min-h-[80vh]'>
-          <Outlet />
-         </div>
-        
-
-        <Footer />
-    </section>
-  )
+		<section>
+			<Navbar />
+			<div className='display' style={{ minHeight: "80vh" }}>
+				<Outlet />
+			</div>
+			<Footer />
+		</section>
+	);
 }
 
 export default Layout

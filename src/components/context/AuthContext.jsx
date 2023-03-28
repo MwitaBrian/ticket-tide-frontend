@@ -9,17 +9,17 @@ export const AuthContext = createContext();
 export default function AuthProvider({children}) 
 {
     const navigate = useNavigate()
-    const [user, setUser] = useState()
 
+    const [user, setUser] = useState(null);
     // login
-    const login = (username, password) =>{
+    const login = (email, password) =>{
         fetch("/login",{
             method: "POST",
             headers:{
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                username, password
+                email, password
             })
         }
         )
@@ -36,7 +36,8 @@ export default function AuthProvider({children})
             }
             else if (response.user) {
                 // set the user token in the session storage
-                sessionStorage.setItem("userToken", response.user.token);
+                // Assume that `jwt` contains the JWT token received from the server
+               sessionStorage.setItem('jwtToken', response.jwt);
                 // navigate to the home page
                 navigate("/");
                 // show success message 
@@ -77,6 +78,7 @@ export default function AuthProvider({children})
         })
     }
 // check logged in user
+
     useEffect(() => {
         fetch("/loggedin", {
             method: "GET",
@@ -91,9 +93,20 @@ export default function AuthProvider({children})
                 setUser(response)
              })
     }, []);
-     // Logout
+
+//   useEffect(() => {
+//     const userToken = sessionStorage.getItem("jwtToken");
+//     if (userToken) {
+//       const decodedToken = jwt_decode(userToken);
+//       setUser(decodedToken);
+//     }
+//   }, []);
+
+//      // Logout
+
      const logout = () =>{
-           console.log("Hello from context")
+          sessionStorage.clear();
+             navigate("/login");
      }
     
     

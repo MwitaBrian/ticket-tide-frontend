@@ -1,12 +1,12 @@
-import React, { useState} from "react";
+import React, { useState, useContext} from "react";
 import { NavLink } from "react-router-dom";
-// import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
-  const [mobile, setMobile] = useState(false);
-  // const { user, logout } = useContext(AuthContext);
-  // console.log(user)
-  
+	const [mobile, setMobile] = useState(false);
+	const { logout } = useContext(AuthContext);
+	const isLoggedIn = sessionStorage.getItem("jwtToken") ? true : false;
+	
 	return (
 		<div>
 		  <nav className='navbar' style={{background: "linear-gradient(to right, #00356B,#1D2951, #131E3A)"}}>
@@ -22,12 +22,25 @@ function Navbar() {
 						<NavLink
 							className='mx-3 rounded-full'
 							style={{ background: "#1E90FF" }}
-							to='/register'>
-							<li>Create Account</li>
-            			</NavLink>
-						<NavLink className='active' to='/login'>
-							<li>Login</li>
+
+
+							to='/new'
+						>
+
+							<li>Create</li>
 						</NavLink>
+						{isLoggedIn ? (
+							<>
+								<li onClick={logout}>Logout</li>
+							</>
+						) : (
+							<>
+								<NavLink activeClassName='active' to='/login'>
+									<li>Login</li>
+								</NavLink>
+							</>
+						)}
+
 					</ul>
 					<button
 						className='mobile-menu-icon'

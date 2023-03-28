@@ -3,6 +3,7 @@ import Contact from './Contact'
 import Upcoming from './Upcoming'
 function Home({ events }) {
   return (
+
     <div style={{marginTop:"10vh"}}>
       <div className="hero-section" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',backgroundColor: 'rgba(128, 128, 128, 0.5)' }}>
   <div className='container-md'>
@@ -35,6 +36,7 @@ function Home({ events }) {
       {/* end of about section */}
        <Contact/>
       </div>
+
   )
 }
 export default Home

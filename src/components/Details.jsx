@@ -5,6 +5,7 @@ import './css/details.css'
 function Details() {
   const { id } = useParams();
   const [event, setEvent] = useState("")
+  console.log(event)
 
   useEffect(() => {
     fetch(`events/${id}`)
@@ -27,7 +28,7 @@ function Details() {
     <div className="row">
       <div className="col">
         <div className="image-wrapper">
-          <img src="https://img.freepik.com/free-photo/young-women-men-spending-free-time-cinema-together_7502-9334.jpg?size=626&ext=jpg&ga=GA1.1.2021238082.1676881974&semt=ais" alt={ event.event_name} />
+          <img src={event.poster_url} alt={ event.event_name} />
           <button className="like-button"><i className="bi bi-heart"></i></button>
         </div>
       </div>

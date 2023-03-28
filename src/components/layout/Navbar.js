@@ -1,12 +1,12 @@
-import React, { useState} from "react";
+import React, { useState, useContext} from "react";
 import { NavLink } from "react-router-dom";
-// import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
-  const [mobile, setMobile] = useState(false);
-  // const { user, logout } = useContext(AuthContext);
-  // console.log(user)
-  
+	const [mobile, setMobile] = useState(false);
+	const { logout } = useContext(AuthContext);
+	const isLoggedIn = sessionStorage.getItem("jwtToken") ? true : false;
+	
 	return (
 		<div>
 			<nav
@@ -39,11 +39,20 @@ function Navbar() {
 							style={{ background: "#1E90FF" }}
 							to='/new'
 						>
-							<li>Create Event</li>
-            </NavLink>
-                  <NavLink activeClassName='active' to='/login'>
-                    <li>Login</li>
-                  </NavLink>
+
+							<li>Create</li>
+						</NavLink>
+						{isLoggedIn ? (
+							<>
+								<li onClick={logout}>Logout</li>
+							</>
+						) : (
+							<>
+								<NavLink activeClassName='active' to='/login'>
+									<li>Login</li>
+								</NavLink>
+							</>
+						)}
 					</ul>
 					<button
 						className='mobile-menu-icon'

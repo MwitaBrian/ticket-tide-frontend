@@ -1,17 +1,21 @@
 import './App.css';
+import React,{useState} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Home from './components/Home';
 import Layout from './components/layout/Layout';
 import Login from './components/Login';
-import Register from './components/Register';
 import Events from './components/Events';
+import Register from './components/Register';
 import Details from './components/Details';
-import New from './components/New';
-
+import AuthProvider from './components/context/AuthContext';
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(
+		sessionStorage.getItem("isLoggedIn") === "true"
+	);
   return (
+
     <BrowserRouter >
     <Routes>
       <Route path='/' element={<Layout />}>
@@ -26,6 +30,8 @@ function App() {
       
     </BrowserRouter>
   );
+
+	
 }
 
 export default App;

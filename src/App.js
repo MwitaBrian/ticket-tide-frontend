@@ -5,7 +5,7 @@ import Layout from './components/layout/Layout';
 import Login from './components/Login';
 // import Tickets from './components/Tickets';
 import Register from './components/Register';
-import Upcoming from './components/Upcoming';
+import Events from './components/Events';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route index element={<Home />}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/new' element={<Register />}/>
-        <Route path='/events' element={<Upcoming />}/>
+        <Route path='/events' element={<Events />}/>
 
         {/* <Route path='/tickets' element={<Tickets />}/> */}
 

@@ -28,7 +28,7 @@ function Upcoming() {
             {upcomingEvents.map((event) => (
               <div className='col' key={event.id}>
                 <div className="event-card">
-                  <img src="https://img.freepik.com/free-photo/young-women-men-spending-free-time-cinema-together_7502-9334.jpg?size=626&ext=jpg&ga=GA1.1.2021238082.1676881974&semt=ais" alt="Event"  style={{width:"350px"}}/>
+                  <img src={event.poster_url} alt="Event"  style={{width:"350px"}}/>
                   <div className="event-details">
                     <h3>{event.event_name}</h3>
                     <p>{event.event_date}</p>

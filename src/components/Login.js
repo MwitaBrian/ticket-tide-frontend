@@ -1,17 +1,18 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom';
+import { AuthContext } from './context/AuthContext';
 
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // const { login } = useContext(AuthContext)
+  const { login } = useContext(AuthContext)
   
     const handleSubmit = (e) => {
     e.preventDefault();
     // handle login logic here
-    // login(username, password)
+    login(email, password)
 
   };
   return (
@@ -20,13 +21,13 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <h1>Login</h1>
       <div>
-        <label htmlFor="username">Username</label><br/>
+        <label htmlFor="username">Password</label><br/>
         <input
           type="text"
           id="username"
           name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
       </div>
@@ -44,7 +45,7 @@ function Login() {
       <div>
         <button style={{ border:"none",
               borderRadius: "5px",
-              padding: "5px"}} disabled={!username || !password}>Sign In</button>
+              padding: "5px"}} disabled={!email || !password}>Sign In</button>
       </div>
       <div>
         <p>Don't have an account? <Link to="/register">Register here</Link>.</p>

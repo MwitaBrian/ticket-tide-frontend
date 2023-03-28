@@ -1,0 +1,53 @@
+.details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* center the row horizontally */
+    align-items: center;
+    margin: 0 auto;
+    /* center the row horizontally */
+    max-width: 1000px;
+    background: #dfdff0;
+}
+
+.image-wrapper {
+    position: relative;
+    height: 0;
+    padding-bottom: 100%;
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.like-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 5px;
+    /* border-radius: 40%; */
+    font-size: 24px;
+}
+
+.like-button:hover {
+    color: red;
+}
+
+
+.details-column h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.details-column p {
+    font-size: 16px;
+}

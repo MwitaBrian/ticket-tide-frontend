@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom';
-// import { AuthContext } from './context/AuthContext';
+
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -12,6 +12,7 @@ function Login() {
     e.preventDefault();
     // handle login logic here
     // login(username, password)
+
   };
   return (
       <div>

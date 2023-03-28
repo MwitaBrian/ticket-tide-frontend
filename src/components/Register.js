@@ -50,17 +50,6 @@ function Register() {
           required
         />
       </div>
-    <div>
-        <label htmlFor="username">Username</label><br/>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </div>
  <div>
         <label htmlFor="phone">Phone</label><br/>
         <input
@@ -69,17 +58,6 @@ function Register() {
           name="phone"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          required
-        />
-              </div>
-               <div>
-        <label htmlFor="image-url">Image</label><br/>
-        <input
-          type="file"
-          id="image_url"
-          name="image_url"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
           required
         />
               </div>

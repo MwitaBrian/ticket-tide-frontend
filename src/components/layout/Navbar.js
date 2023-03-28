@@ -39,7 +39,7 @@ function Navbar() {
 							style={{ background: "#1E90FF" }}
 							to='/new'
 						>
-							<li>Create</li>
+							<li>Create Account</li>
             </NavLink>
                   <NavLink activeClassName='active' to='/login'>
                     <li>Login</li>

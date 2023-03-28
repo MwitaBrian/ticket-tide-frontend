@@ -5,6 +5,8 @@ import Layout from './components/layout/Layout';
 import Login from './components/Login';
 import Register from './components/Register';
 import Events from './components/Events';
+import Details from './components/Details';
+import New from './components/New';
 
 
 
@@ -17,6 +19,8 @@ function App() {
         <Route path='/login' element={<Login />}/>
         <Route path='/register' element={<Register />}/>
         <Route path='/events' element={<Events />}/>
+        <Route path='/details/:id' element={<Details />}/>
+        <Route path='/new' element={<New />} />
       </Route>
     </Routes>
       

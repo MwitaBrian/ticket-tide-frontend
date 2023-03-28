@@ -1,4 +1,4 @@
-import { createContext,useEffect } from "react";
+import { createContext,useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2"
 
@@ -9,6 +9,8 @@ export const AuthContext = createContext();
 export default function AuthProvider({children}) 
 {
     const navigate = useNavigate()
+    const [user, setUser] = useState()
+
     // login
     const login = (username, password) =>{
         fetch("/login",{
@@ -76,8 +78,8 @@ export default function AuthProvider({children})
     }
 // check logged in user
     useEffect(() => {
-        fetch("/", {
-            method: "DELETE",
+        fetch("/loggedin", {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -85,7 +87,9 @@ export default function AuthProvider({children})
         }
         )
             .then(res => res.json())
-            .then(response => { })
+            .then(response => {
+                setUser(response)
+             })
     }, []);
      // Logout
      const logout = () =>{

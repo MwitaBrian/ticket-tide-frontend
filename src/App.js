@@ -5,6 +5,7 @@ import Layout from './components/layout/Layout';
 import Login from './components/Login';
 import Tickets from './components/Tickets';
 import Register from './components/Register';
+import Events from './components/Events';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/login' element={<Login />}/>
         <Route path='/register' element={<Register />}/>
         <Route path='/tickets' element={<Tickets />}/>
+        <Route path='/events' element={<Events />}/>
 
       </Route>
     </Routes>

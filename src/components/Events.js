@@ -58,7 +58,7 @@ useEffect(() => {
           {/* Map over events array and create a card for each item */}
           {filteredEvents.map((event, index) => (
             <div className='card' key={index} style={{ maxWidth:"350px", margin:"auto", marginBottom:"10px", Height:"350px"}}>
-              <img className='card-img-top' src="https://img.freepik.com/free-photo/young-women-men-spending-free-time-cinema-together_7502-9334.jpg?size=626&ext=jpg&ga=GA1.1.2021238082.1676881974&semt=ais" alt={event.event_name} />
+              <img className='card-img-top' src={event.poster_url} alt={event.event_name} />
               <div className='card-body'>
                 <p>{event.event_date} {event.start_time}</p>
                 <h4 className='card-title'>{event.event_name}</h4>

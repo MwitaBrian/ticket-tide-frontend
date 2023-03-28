@@ -41,18 +41,9 @@ function Navbar() {
 						>
 							<li>Create Account</li>
             </NavLink>
-            {/* {
-              user && user.loggedin ?
-                <>
-                  <div onClick={logout}>Logout</div>
-                </>
-                :
-                <> */}
                   <NavLink activeClassName='active' to='/login'>
                     <li>Login</li>
                   </NavLink>
-                {/* </>
-            } */}
 					</ul>
 					<button
 						className='mobile-menu-icon'

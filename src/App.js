@@ -4,6 +4,8 @@ import Home from './components/Home';
 import Layout from './components/layout/Layout';
 import Register from './components/Register';
 import Login from './components/Login';
+import Events from './components/Events';
+
 
 function App() {
   return (
@@ -11,7 +13,8 @@ function App() {
     <Routes>
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />}/>
-        <Route path='/login' element={<Login />}/>
+          <Route path='/login' element={<Login />} />
+          <Route path='/events' element={<Events />} />
         <Route path='/register' element={<Register />}/>
       </Route>
     </Routes>

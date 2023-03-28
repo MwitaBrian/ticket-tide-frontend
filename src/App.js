@@ -3,9 +3,8 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Home from './components/Home';
 import Layout from './components/layout/Layout';
 import Login from './components/Login';
-// import Tickets from './components/Tickets';
 import Register from './components/Register';
-import Events from './components/Events';
+import Upcoming from './components/Upcoming';
 
 function App() {
   return (
@@ -14,11 +13,11 @@ function App() {
       <Route path='/' element={<Layout />}>
         <Route index element={<Home />}/>
         <Route path='/login' element={<Login />}/>
+
         <Route path='/new' element={<Register />}/>
-        <Route path='/events' element={<Events />}/>
+        <Route path='/events' element={<Upcoming />}/>
 
-        {/* <Route path='/tickets' element={<Tickets />}/> */}
-
+        <Route path='/register' element={<Register />}/>
       </Route>
     </Routes>
       

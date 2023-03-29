@@ -19,6 +19,9 @@ function Navbar() {
 						<NavLink className='active' to='/events'>
 							<li>Events</li>
 						</NavLink>
+						<NavLink className='active' to='/Payment'>
+							<li>Payment</li>
+						</NavLink>
 						<NavLink
 							className='mx-3 rounded-full'
 							style={{ background: "#1E90FF" }}

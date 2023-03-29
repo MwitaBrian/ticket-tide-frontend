@@ -1,34 +1,32 @@
 import React, { useState } from 'react';
 
-const PaymentForm = ({ event }) => {
+const Payment = ({ event }) => {
   const [amount, setAmount] = useState('');
   const [currency, setCurrency] = useState('USD');
   const [description, setDescription] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const response = await fetch(`/events/${event.id}/payments`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      },
-      body: JSON.stringify({ payment: { amount, currency, description }})
-    });
-
-    if (response.ok) {
-      // Payment created successfully
-    } else {
-      // Handle payment error
-    }
+    const paymentWindow = window.open('', 'Payment', 'height=400,width=600');
+    paymentWindow.document.title = 'Payment';
+    paymentWindow.document.body.innerHTML = `
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <h2>Payment Details</h2>
+        <p>Amount: ${amount} ${currency}</p>
+        <p>Description: ${description}</p>
+        <h3>Select Payment Method</h3>
+        <button>Pay with Credit Card</button>
+        <button>Pay with Mpesa</button>
+        <button>Pay with PayPal</button>
+        <button>Pay with Payoneer</button>
+      </div>
+    `;
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="amount">Amount</label>
       <input type="text" id="amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
-
       <label htmlFor="currency">Currency</label>
       <select id="currency" value={currency} onChange={(e) => setCurrency(e.target.value)}>
         <option value="USD">USD</option>
@@ -42,9 +40,8 @@ const PaymentForm = ({ event }) => {
       <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
 
       <button type="submit">Pay Now</button> 
-      <button type="button" onClick={onClose}>Cancel</button>
     </form>
   );
 };
 
-export default PaymentForm;
+export default Payment;

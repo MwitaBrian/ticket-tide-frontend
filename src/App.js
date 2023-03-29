@@ -8,6 +8,7 @@ import Events from './components/Events';
 import Register from './components/Register';
 import Details from './components/Details';
 import New from './components/New';
+import Payment from './components/Payment';
 import AuthProvider from './components/context/AuthContext';
 
 
@@ -26,6 +27,7 @@ function App() {
 						<Route path='/events' element={<Events />} />
 						<Route path='/details/:id' element={<Details />} />
 						<Route path='/new' element={<New />} />
+						<Route path='/Payment' element={<Payment />} />
 					</Route>
 				</Routes>
 			</AuthProvider>

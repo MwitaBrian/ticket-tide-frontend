@@ -1,16 +1,45 @@
 import React,{useState} from 'react'
 import { Link } from 'react-router-dom';
+// import { AuthContext } from './context/AuthContext';
+
+
 function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phone, setPhone] = useState('');
+  const [level, setLevel] = useState('user');
+ 
+  // const { register } = useContext(AuthContext);
 // handle user signUp
   function handleSignUp(e) {
-    e.preventDefault()
-    console.log(email,firstName,lastName,password,phone)
-  }
+    e.preventDefault();
+    const last_name = lastName
+    const first_name = firstName
+
+    // register(email, password, first_name, last_name, phone);
+    // console.log(email, password, first_name, last_name, password)
+    fetch("/users", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				last_name,
+				first_name,
+				phone,
+				email,
+        password,
+        level
+			}),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data); // Update the state variable with the response data
+			});
+
+
   return (
     <div className='hero pt-5'>
       <form onSubmit={handleSignUp}>

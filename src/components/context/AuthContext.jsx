@@ -1,16 +1,17 @@
-import { createContext,useEffect, useState } from "react";
+import { createContext, useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2"
-
 export const AuthContext = createContext();
 
 
 
 export default function AuthProvider({children}) 
 {
+  
     const navigate = useNavigate()
 
     const [user, setUser] = useState(null);
+    console.log(user)
     // login
     const login = (email, password) =>{
         fetch("/login",{
@@ -37,7 +38,8 @@ export default function AuthProvider({children})
             else if (response.user) {
                 // set the user token in the session storage
                 // Assume that `jwt` contains the JWT token received from the server
-               sessionStorage.setItem('jwtToken', response.jwt);
+              sessionStorage.setItem('jwtToken', response.jwt);
+               sessionStorage.setItem('level', response.user.level);
                 // navigate to the home page
                 navigate("/");
                 // show success message 
@@ -61,49 +63,50 @@ export default function AuthProvider({children})
     }
 
      // Register
-    const register = (last_name, first_name, phone, email,password) =>{
-        fetch(`/users`, {
-            method: "POST",
-             headers:{
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                last_name,first_name,email, phone, password
-            })
-            
-        })
-            .then((res) => (res.json))
-            .then(response => {
-            console.log(response)
-        })
-    }
+//    const register = (last_name, first_name, phone, email, password) =>{
+//     fetch("/users", {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         last_name,
+//         first_name,
+//         phone,
+//         email,
+//         password
+//       })
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//       console.log(data); // Update the state variable with the response data
+     
+//     })
+  
+// }
+
 // check logged in user
+  const token = sessionStorage.getItem('token');
 
-    useEffect(() => {
-        fetch("/loggedin", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            },
-           
-        }
-        )
-            .then(res => res.json())
-            .then(response => {
-                setUser(response)
-             })
-    }, []);
+  useEffect(() => {
+    fetch("/loggedin", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
+      },
+    })
+      .then(res => res.json())
+      .then(response => {
+        setUser(response);
+      })
+      .catch(error => console.error('Error:', error));
+  }, []);
 
-//   useEffect(() => {
-//     const userToken = sessionStorage.getItem("jwtToken");
-//     if (userToken) {
-//       const decodedToken = jwt_decode(userToken);
-//       setUser(decodedToken);
-//     }
-//   }, []);
 
-//      // Logout
 
+    
+     // Logout
      const logout = () =>{
           sessionStorage.clear();
              navigate("/login");
@@ -112,7 +115,7 @@ export default function AuthProvider({children})
     
 
     const contextData = {
-        login, register, logout
+        login, logout
     }
 
   return (

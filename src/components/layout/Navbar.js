@@ -6,6 +6,7 @@ function Navbar() {
 	const [mobile, setMobile] = useState(false);
 	const { logout } = useContext(AuthContext);
 	const isLoggedIn = sessionStorage.getItem("jwtToken") ? true : false;
+	const level = sessionStorage.getItem("level")
 	
 	return (
 		<div>
@@ -19,19 +20,38 @@ function Navbar() {
 						<NavLink className='active' to='/events'>
 							<li>Events</li>
 						</NavLink>
-						<NavLink
-							className='mx-3 rounded-full'
-							style={{ background: "#1E90FF" }}
+
+						{level === "admin" ? (
+							<>
+								<NavLink
+									activeClassName='active'
+									className='mx-3'
+									style={{ background: "#1E90FF" }}
+									to='/new'
+								>
+									<li>Create</li>
+								</NavLink>
+							</>
+						) : null}
 
 
-							to='/new'
-						>
-
-							<li>Create</li>
-						</NavLink>
 						{isLoggedIn ? (
 							<>
-								<li onClick={logout}>Logout</li>
+								<li className='d-flex' onClick={logout}>
+									<img
+										className='avatar'
+										style={{
+											width: "35px",
+											height: "35px",
+											borderRadius: "50%",
+											border: "2px solid #fbfbff",
+											marginRight: "3px",
+										}}
+										src=''
+										alt=''
+									/>
+									Logout
+								</li>
 							</>
 						) : (
 							<>

@@ -11,9 +11,11 @@ import New from './components/New';
 import AuthProvider from './components/context/AuthContext';
 
 
+
 function App() {
  
   return (
+
 		<BrowserRouter>
 			<AuthProvider>
 				<Routes>
@@ -30,7 +32,7 @@ function App() {
 		</BrowserRouter>
 	);
 
-	
+
 }
 
 export default App;

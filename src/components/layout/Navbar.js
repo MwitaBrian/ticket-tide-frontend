@@ -10,30 +10,17 @@ function Navbar() {
 	
 	return (
 		<div>
-			<nav
-				className='navbar'
-				style={{
-					background: "linear-gradient(to right, #00356B,#1D2951, #131E3A)",
-				}}
-			>
-				<div className='container'>
-					<h3
-						className='logo'
-						style={{ textTransform: "uppercase", fontWeight: "900" }}
-					>
-						Ticket-
-						<span>Tide</span>
-					</h3>
-					<ul
-						className={mobile ? "nav-links-mobile" : "nav-links"}
-						onClick={() => setMobile(false)}
-					>
-						<NavLink exact activeClassName='active' to='/'>
+		  <nav className='navbar' style={{background: "linear-gradient(to right, #00356B,#1D2951, #131E3A)"}}>
+			<div className='container'>
+				<h3 className='logo' style={{ textTransform: "uppercase", fontWeight: "900" }}>Ticket-<span>Tide</span></h3>
+					<ul className={mobile ? "nav-links-mobile" : "nav-links"} onClick={() => setMobile(false)}>
+						<NavLink  className='active' to='/'>
 							<li>Home</li>
 						</NavLink>
-						<NavLink activeClassName='active' to='/events'>
+						<NavLink className='active' to='/events'>
 							<li>Events</li>
 						</NavLink>
+
 						{level === "admin" ? (
 							<>
 								<NavLink
@@ -46,6 +33,7 @@ function Navbar() {
 								</NavLink>
 							</>
 						) : null}
+
 
 						{isLoggedIn ? (
 							<>
@@ -72,6 +60,7 @@ function Navbar() {
 								</NavLink>
 							</>
 						)}
+
 					</ul>
 					<button
 						className='mobile-menu-icon'

@@ -42,7 +42,7 @@ const PaymentForm = ({ event }) => {
       <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
 
       <button type="submit">Pay Now</button> 
-      <button type="button" onClick={onClose}>Cancel</button>
+      <button type="button" >Cancel</button>
     </form>
   );
 };

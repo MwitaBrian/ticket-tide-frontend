@@ -23,7 +23,7 @@ function Events() {
 useEffect(() => {
   // Filter events based on search query
   if (events.length > 0) {
-    const filteredEvents = events.filter(event => {
+      const filteredEvents = events.filter(event => {
       const eventName = event.event_name || '';
       const location = event.location || '';
       const search = searchQuery;

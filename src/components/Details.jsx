@@ -3,10 +3,13 @@ import { useParams } from "react-router-dom";
 import './css/details.css'
 
 function Details() {
+  const [likes, setLikes] = useState(0)
   const { id } = useParams();
   const [event, setEvent] = useState("")
   console.log(event)
-
+  function handleLikeClick (){
+    setLikes(likes + 1)
+  }
   useEffect(() => {
     fetch(`events/${id}`)
       .then((res) => res.json())
@@ -29,7 +32,7 @@ function Details() {
       <div className="col">
         <div className="image-wrapper">
           <img src={event.poster_url} alt={ event.event_name} />
-          <button className="like-button"><i className="bi bi-heart"></i></button>
+          <button onClick = {handleLikeClick} className="like-button"><i className="bi bi-heart"></i></button>
         </div>
       </div>
       <div className="col">
@@ -51,7 +54,7 @@ function Details() {
           <i className="bi bi-instagram" style={{ marginRight: '10px' }}></i>
           <i className="bi bi-whatsapp" style={{ marginRight: '10px' }}></i>
         </div>
-        <p><i className="bi bi-heart-fill" style={{ color: 'red', marginRight: '5px' }}></i>Likes</p>
+        <p><i className="bi bi-heart-fill" style={{ color: 'red', marginRight: '5px' }}>{likes}</i>Likes</p>
       </div>
     </div>
   </div>

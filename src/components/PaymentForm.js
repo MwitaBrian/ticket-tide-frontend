@@ -23,6 +23,9 @@ const PaymentForm = ({ event }) => {
       // Handle payment error
     }
   };
+  function onClose (){
+    
+  }
 
   return (
     <form onSubmit={handleSubmit}>

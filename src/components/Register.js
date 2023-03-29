@@ -1,15 +1,18 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import { Link } from 'react-router-dom';
+import { AuthContext } from './context/AuthContext';
 function Register() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const {user, setUser, register, error} = useContext(AuthContext)
+    const [email, setEmail] = useState(user ? user.email : "");
+    const [password, setPassword] = useState(user ? user.password : "");
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phone, setPhone] = useState('');
 // handle user signUp
   function handleSignUp(e) {
     e.preventDefault()
-    console.log(email,firstName,lastName,password,phone)
+    //console.log(email,firstName,lastName,password,phone)
+    register({email, password, phone,firstName,lastName})
   }
   return (
     <div className='hero pt-5'>

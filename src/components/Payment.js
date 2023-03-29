@@ -77,7 +77,7 @@ const Payment = ({ event }) => {
     <form onSubmit={handleSubmit}>
       <label htmlFor="amount">Amount</label>
       <input type="text" id="amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
-      <label htmlFor="currency">Currency</label>
+      <label htmlFor="currency">Currency (For M-pesa Users choose KES)</label>
       <select id="currency" value={currency} onChange={(e) => setCurrency(e.target.value)}>
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
@@ -86,7 +86,7 @@ const Payment = ({ event }) => {
         <option value="CAD">CAD</option>
       </select>
 
-      <label htmlFor="description">Description</label>
+      <label htmlFor="description">Description (Write the name of the event)</label>
       <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
 
       <button type="submit">Pay Now</button> 

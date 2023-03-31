@@ -33,7 +33,7 @@ function Details() {
    
     const tickets = amount
     const total = totalPrice
-   
+    console.log(event_id)
  
   
 console.log(user_id,event_id, tickets, total)
@@ -41,7 +41,7 @@ console.log(user_id,event_id, tickets, total)
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${sessionStorage.token}`,
+      // Authorization: `Bearer ${sessionStorage.token}`,
     },
     body: JSON.stringify({user_id,event_id, tickets, total}),
   })
@@ -52,7 +52,7 @@ console.log(user_id,event_id, tickets, total)
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: response.error,
+                    text: response.errors,
                   })
             }
             else if (response.booking) {

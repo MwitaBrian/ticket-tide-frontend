@@ -1,20 +1,58 @@
-import React, { useState, useContext} from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { NavLink ,useNavigate} from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
+	// const navigate = useNavigate()
+	 const { userInfo } = useContext(AuthContext);
 	const [mobile, setMobile] = useState(false);
-	const { logout } = useContext(AuthContext);
+	const { logout ,currentUser} = useContext(AuthContext);
 	const isLoggedIn = sessionStorage.getItem("jwtToken") ? true : false;
-	const level = sessionStorage.getItem("level")
-	
+	const level = sessionStorage.getItem("level");
+	// const id = sessionStorage.getItem('user_id')
+
+	// function userInfo() {
+	// 	fetch(`http://localhost:3000/users/${id}`, {
+	// 		method: "GET",
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 			Authorization: `Bearer ${sessionStorage.jwtToken}`,
+	// 		},
+	// 	})
+	// 		.then((res) => res.json())
+	// 		.then((response) => {
+	// 			console.log(response);
+	// 			navigate('/profile')
+
+	// 			// do something with the user info here
+	// 		})
+	// 		.catch((error) => console.error(error));
+	// }
+
+
 	return (
 		<div>
-		  <nav className='navbar' style={{background: "linear-gradient(to right, #00356B,#1D2951, #131E3A)"}}>
-			<div className='container'>
-				<h3 className='logo' style={{ textTransform: "uppercase", fontWeight: "900" }}>Ticket-<span>Tide</span></h3>
-					<ul className={mobile ? "nav-links-mobile" : "nav-links"} onClick={() => setMobile(false)}>
-						<NavLink  className='active' to='/'>
+
+			<nav
+				className='navbar'
+				style={{
+					background: "linear-gradient(to right, #00356B,#1D2951, #131E3A)",
+				}}
+			>
+				<div className='container'>
+					<h3
+						className='logo'
+						style={{ textTransform: "uppercase", fontWeight: "900" }}
+					>
+						Ticket-<span>Tide</span>
+					</h3>
+					<ul
+						className={mobile ? "nav-links-mobile" : "nav-links"}
+						onClick={() => setMobile(false)}
+					>
+						<NavLink exact activeClassName='active' to='/'>
+
+		  
 							<li>Home</li>
 						</NavLink>
 						<NavLink className='active' to='/events'>
@@ -37,20 +75,47 @@ function Navbar() {
 
 						{isLoggedIn ? (
 							<>
-								<li className='d-flex' onClick={logout}>
-									<img
-										className='avatar'
-										style={{
-											width: "35px",
-											height: "35px",
-											borderRadius: "50%",
-											border: "2px solid #fbfbff",
-											marginRight: "3px",
-										}}
-										src=''
-										alt=''
-									/>
-									Logout
+								<li className='dropdown'>
+									<a
+										className='dropdown-toggle d-flex'
+										href='!#'
+										role='button'
+										id='navbarDropdownMenuLink'
+										data-toggle='dropdown'
+										aria-haspopup='true'
+										aria-expanded='false'
+									>
+										<img
+											className='avatar'
+											style={{
+												width: "35px",
+												height: "35px",
+												borderRadius: "50%",
+												border: "2px solid #fbfbff",
+												marginRight: "3px",
+											}}
+											src='https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'
+											alt='Alternative avatar'
+										/>
+										{currentUser.last_name}
+									</a>
+									<div
+										className='dropdown-menu'
+										aria-labelledby='navbarDropdownMenuLink'
+									>
+										<a className='dropdown-item' href='/profile'>
+											<i class='bi bi-person-square'>
+												Profile
+											</i>
+										</a>
+										<a
+											className='dropdown-item'
+											href='#!'
+											onClick={() => logout()}
+										>
+											<i class='bi bi-door-closed-fill'> Logout</i>
+										</a>
+									</div>
 								</li>
 							</>
 						) : (

@@ -8,11 +8,13 @@ export const AuthContext = createContext();
 export default function AuthProvider({children}) 
 {
   
+
   const navigate = useNavigate()
   const [currentUser, setCurrentUser] = useState("")
   const [user, setUser]= useState('')
-  // console.log(currentUser)
+  console.log(currentUser)
   
+
     // login
     const login = (email, password) =>{
         fetch("/login",{
@@ -110,8 +112,6 @@ export default function AuthProvider({children})
 // }
 
 // check logged in user
-  // check if user is logged in
-  
   const token = sessionStorage.getItem('token');
 
   useEffect(() => {

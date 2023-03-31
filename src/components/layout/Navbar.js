@@ -32,6 +32,7 @@ function Navbar() {
 
 	return (
 		<div>
+
 			<nav
 				className='navbar'
 				style={{
@@ -50,11 +51,14 @@ function Navbar() {
 						onClick={() => setMobile(false)}
 					>
 						<NavLink exact activeClassName='active' to='/'>
+
+		  
 							<li>Home</li>
 						</NavLink>
-						<NavLink activeClassName='active' to='/events'>
+						<NavLink className='active' to='/events'>
 							<li>Events</li>
 						</NavLink>
+
 						{level === "admin" ? (
 							<>
 								<NavLink
@@ -67,6 +71,7 @@ function Navbar() {
 								</NavLink>
 							</>
 						) : null}
+
 
 						{isLoggedIn ? (
 							<>
@@ -120,6 +125,7 @@ function Navbar() {
 								</NavLink>
 							</>
 						)}
+
 					</ul>
 					<button
 						className='mobile-menu-icon'

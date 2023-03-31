@@ -13,9 +13,11 @@ import AuthProvider from './components/context/AuthContext';
 import EventsProvider from './components/context/EventContext';
 
 
+
 function App() {
  
   return (
+
 		<BrowserRouter>
 			<AuthProvider>
 				<EventsProvider>
@@ -35,7 +37,7 @@ function App() {
 		</BrowserRouter>
 	);
 
-	
+
 }
 
 export default App;

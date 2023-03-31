@@ -4,30 +4,13 @@ import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
 	// const navigate = useNavigate()
-	 const { userInfo } = useContext(AuthContext);
+	
 	const [mobile, setMobile] = useState(false);
 	const { logout ,currentUser} = useContext(AuthContext);
 	const isLoggedIn = sessionStorage.getItem("jwtToken") ? true : false;
 	const level = sessionStorage.getItem("level");
 	// const id = sessionStorage.getItem('user_id')
 
-	// function userInfo() {
-	// 	fetch(`http://localhost:3000/users/${id}`, {
-	// 		method: "GET",
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 			Authorization: `Bearer ${sessionStorage.jwtToken}`,
-	// 		},
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.then((response) => {
-	// 			console.log(response);
-	// 			navigate('/profile')
-
-	// 			// do something with the user info here
-	// 		})
-	// 		.catch((error) => console.error(error));
-	// }
 
 
 	return (

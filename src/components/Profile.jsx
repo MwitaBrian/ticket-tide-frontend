@@ -170,8 +170,8 @@ function handleDelete(id) {
       type="text"
       id="first-name"
       name="first_name"
-     onChange={(bryan) =>
-													setData({ ...data, first_name: bryan.target.value })
+     onChange={(e) =>
+													setData({ ...data, first_name: e.target.value })
 												}
                         value={data.first_name}
                       
@@ -185,8 +185,8 @@ function handleDelete(id) {
                         name='last_name'
      
                         value={data.last_name}
-                        onChange={(bryan) =>
-                          setData({ ...data, last_name: bryan.target.value })}
+                        onChange={(e) =>
+                          setData({ ...data, last_name: e.target.value })}
     />
   </div>
   <div>
@@ -195,8 +195,8 @@ function handleDelete(id) {
       type="text"
       id="email"
       name="email"
-                        onChange={(bryan) =>
-                          setData({ ...data, email: bryan.target.value })}
+                        onChange={(e) =>
+                          setData({ ...data, email: e.target.value })}
       value={data.email}
     />
   </div>
@@ -206,8 +206,8 @@ function handleDelete(id) {
       type="tel"
       id="phone"
       name="phone"
-     onChange={(bryan) =>
-													setData({ ...data, phone: bryan.target.value })}
+     onChange={(e) =>
+													setData({ ...data, phone: e.target.value })}
       value={data.phone}
     />
   </div>
@@ -217,8 +217,8 @@ function handleDelete(id) {
       type="file"
       id="image"
                         name="image"
-                       onChange={(bryan) =>
-													setData({ ...data, image: bryan.target.files[0] })}
+                       onChange={(e) =>
+													setData({ ...data, image: e.target.files[0] })}
     />
   </div>
   <div className='d-flex gap-4'>
@@ -284,8 +284,8 @@ function handleDelete(id) {
 			className='form-control'
                               id='event_name'
                               name='event_name'
-		onChange={(bryan) =>
-													setBryan({ ...bryan, event_name: bryan.target.value })}
+		onChange={(e) =>
+													setBryan({ ...bryan, event_name: e.target.value })}
       value={bryan.event_name}
 		/>
 	</div>
@@ -295,8 +295,8 @@ function handleDelete(id) {
 			type='date'
 			className='form-control'
 			id='event_date'
-			onChange={(bryan) =>
-													setBryan({ ...bryan, event_date: bryan.target.value })}
+			onChange={(e) =>
+													setBryan({ ...bryan, event_date: e.target.value })}
       value={bryan.event_date}
 		/>
 	</div>
@@ -306,8 +306,8 @@ function handleDelete(id) {
 			type='text'
 			className='form-control'
 			id='event_location'
-			onChange={(bryan) =>
-													setBryan({ ...bryan, event_location: bryan.target.value })}
+			onChange={(e) =>
+													setBryan({ ...bryan, event_location: e.target.value })}
       value={bryan.event_location}
 		/>
 	</div>
@@ -328,8 +328,8 @@ function handleDelete(id) {
 									type='text'
 									className='form-control'
 									id='poster-url'
-									onChange={(bryan) =>
-													setBryan({ ...bryan, poster_url: bryan.target.value })}
+									onChange={(e) =>
+													setBryan({ ...bryan, poster_url: e.target.value })}
       value={bryan.poster_url}
 								/>
 							</div>
@@ -339,8 +339,8 @@ function handleDelete(id) {
 									type='number'
 									className='form-control'
 									id='bryan-price'
-									onChange={(bryan) =>
-													setBryan({ ...bryan, event_price: bryan.target.value })}
+									onChange={(e) =>
+													setBryan({ ...bryan, event_price: e.target.value })}
       value={bryan.event_price}
 								/>
 							</div>
@@ -352,8 +352,8 @@ function handleDelete(id) {
 									type='number'
 									className='form-control'
 									id='total-tickets'
-									onChange={(bryan) =>
-													setBryan({ ...bryan, total_tickets: bryan.target.value })}
+									onChange={(e) =>
+													setBryan({ ...bryan, total_tickets: e.target.value })}
       value={bryan.total_tickets}
 								/>
 							</div>
@@ -363,8 +363,8 @@ function handleDelete(id) {
 									type='text'
 									className='form-control'
 									id='start-time'
-									onChange={(bryan) =>
-													setBryan({ ...bryan, start_time: bryan.target.value })}
+									onChange={(e) =>
+													setBryan({ ...bryan, start_time: e.target.value })}
       value={bryan.start_time}
 								/>
 							</div>
@@ -374,8 +374,8 @@ function handleDelete(id) {
 									type='text'
 									id='endTime'
 									className='form-control'
-									onChange={(bryan) =>
-													setBryan({ ...bryan, end_time: bryan.target.value })}
+									onChange={(e) =>
+													setBryan({ ...bryan, end_time: e.target.value })}
       value={bryan.end_time}
 								/>
 							</div>
@@ -385,8 +385,8 @@ function handleDelete(id) {
 									type='text'
 									id='contact'
 									className='form-control'
-									onChange={(bryan) =>
-													setBryan({ ...bryan, contact: bryan.target.value })}
+									onChange={(e) =>
+													setBryan({ ...bryan, contact: e.target.value })}
       value={bryan.contact}
 								/>
 							</div>
@@ -396,8 +396,8 @@ function handleDelete(id) {
 									type='text'
 									id='contact'
 									className='form-control'
-								onChange={(bryan) =>
-													setBryan({ ...bryan, cotegory: bryan.target.value })}
+								onChange={(e) =>
+													setBryan({ ...bryan, cotegory: e.target.value })}
       value={bryan.category}
 								/>
 							</div>
@@ -407,8 +407,8 @@ function handleDelete(id) {
 									type='number'
 									id='ageRestriction'
 									className='form-control'
-									onChange={(bryan) =>
-													setBryan({ ...bryan, age_restriction: bryan.target.value })}
+									onChange={(e) =>
+													setBryan({ ...bryan, age_restriction: e.target.value })}
       value={bryan.age_restriction}
 								/>
 							</div>

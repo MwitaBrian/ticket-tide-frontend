@@ -8,9 +8,11 @@ export const AuthContext = createContext();
 export default function AuthProvider({children}) 
 {
   
-    const navigate = useNavigate()
-    const [user, setUser] = useState(null);
-    console.log(user)
+  const navigate = useNavigate()
+  const [currentUser, setCurrentUser] = useState("")
+  const [user, setUser]= useState('')
+  // console.log(currentUser)
+  
     // login
     const login = (email, password) =>{
         fetch("/login",{
@@ -38,7 +40,9 @@ export default function AuthProvider({children})
                 // set the user token in the session storage
                 // Assume that `jwt` contains the JWT token received from the server
               sessionStorage.setItem('jwtToken', response.jwt);
-               sessionStorage.setItem('level', response.user.level);
+              sessionStorage.setItem('level', response.user.level);
+              setCurrentUser(response.user)
+              sessionStorage.setItem('user_id', response.user.id)
                 // navigate to the home page
                 navigate("/");
                 // show success message 
@@ -60,7 +64,28 @@ export default function AuthProvider({children})
             }
         })
     }
+// const id = sessionStorage.getItem('user_id')
+//   function userInfo() {
+// 		fetch(`http://localhost:3000/users/${id}`, {
+// 			method: "GET",
+// 			headers: {
+// 				"Content-Type": "application/json",
+// 				Authorization: `Bearer ${sessionStorage.jwtToken}`,
+// 			},
+// 		})
+// 			.then((res) => res.json())
+// 			.then((response) => {
+//         console.log(response);
+//         setUser(response)
+// 				navigate('/profile')
 
+// 				// do something with the user info here
+// 			})
+// 			.catch((error) => console.error(error));
+// 	}
+  
+  
+  
      // Register
 //    const register = (last_name, first_name, phone, email, password) =>{
 //     fetch("/users", {
@@ -99,24 +124,25 @@ export default function AuthProvider({children})
     })
       .then(res => res.json())
       .then(response => {
-        setUser(response);
+        // setUser(response);
       })
       .catch(error => console.error('Error:', error));
-  }, []);
+  }, [token]);
 
 
 
     
      // Logout
      const logout = () =>{
-          sessionStorage.clear();
+       sessionStorage.clear();
+       localStorage.clear();
              navigate("/login");
      }
     
     
 
     const contextData = {
-        login, logout
+        login, logout, currentUser, user
     }
 
   return (

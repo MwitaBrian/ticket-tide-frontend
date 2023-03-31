@@ -1,6 +1,7 @@
 import React, {useEffect, useState } from 'react'
 import { useParams } from "react-router-dom";
 import './css/details.css'
+import Swal from "sweetalert2"
 
 function Details() {
   const { id } = useParams();
@@ -22,28 +23,68 @@ function Details() {
       });
   }, [id]);
 
-    const [amount, setAmount] = useState('');
-  const [currency, setCurrency] = useState('USD');
-  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [total,setTotal] = useState(0)
+  
+ const event_id = event.id
+  function handleSubmit(event) {
+  event.preventDefault();
+    const user_id = sessionStorage.getItem('user_id')
+   
+    const tickets = amount
+    const total = totalPrice
+   
+ 
+  
+console.log(user_id,event_id, tickets, total)
+  fetch(`http://localhost:3000/bookings`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.token}`,
+    },
+    body: JSON.stringify({user_id,event_id, tickets, total}),
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      // Show success message to the user
+   if(response.error){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: response.error,
+                  })
+            }
+            else if (response.booking) {
+                // show success message 
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Booking in Successfully!',
+                    showConfirmButton: false,
+                    timer: 1500
+                    })
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+            }
+            else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                  })
+            }
+    })
+    
+}
 
-    const response = await fetch(`/events/${event.id}/payments`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      },
-      body: JSON.stringify({ payment: { amount, currency, description }})
-    });
 
-    if (response.ok) {
-      // Payment created successfully
-    } else {
-      // Handle payment error
-    }
+  const handleAmountChange = (e) => {
+    const value = parseInt(e.target.value);
+    setAmount(value);
   };
+
+  const totalPrice = event.event_price * amount; 
+
 
   return (
     <div style={{ minHeight: '100vh', marginTop: '70px' }}>
@@ -69,6 +110,7 @@ function Details() {
             {isLoggedIn ? (
               <>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookModal"
+                
             style={{ backgroundColor: '#007bff', color: '#fff', padding: '5px', borderRadius: '5px', border: 'none', marginRight: '10px' }}
             >
             Book Your Ticket
@@ -76,7 +118,7 @@ function Details() {
               </>
             ) : (
                 <>
-                  <h1>PLease login first to access this</h1>
+                  <h5>PLease login first to access this</h5>
                 </>
               )
               
@@ -106,33 +148,36 @@ function Details() {
         </button>
       </div>
       <div class="modal-body">
-              <form onSubmit={handleSubmit}>
-                <div className='row'>
-                  <div className='col'></div>
-                   <div className='col'></div>
+           <form onSubmit={handleSubmit}>
+      <div className="row">
+        <div className="col"></div>
+        <div className="col"></div>
                 </div>
-                <h5>Ticket: ${ event.event_price}</h5>
-      <label htmlFor="amount">Amount</label>
-      <input type="text" id="amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
-
-      <label htmlFor="currency">Currency</label>
-      <select id="currency" value={currency} onChange={(e) => setCurrency(e.target.value)}>
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="GBP">GBP</option>
-        <option value="KES">KES</option>
-        <option value="CAD">CAD</option>
-      </select>
-
-      <label htmlFor="description">Description</label>
-      <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
-
-      <button type="submit">Pay Now</button> 
-      <button type="button" >Cancel</button>
+        <h5>{event.id}</h5>
+      <h5>Ticket Price: ${event.event_price}</h5>
+      <h5>Tickets left: {parseInt(event.total_tickets)}</h5>
+      <label htmlFor="amount">Number of tickets: </label>
+      <input
+        type="number"
+        id="amount"
+        value={amount}
+        onChange={handleAmountChange}
+      />
+      <label htmlFor="total">Total: </label>
+      <input
+        type="number"
+        id="total"
+                  value={totalPrice}
+                  onChange={(event) =>
+													setTotal( event.target.value )}
+                 
+        disabled
+      />
+      <button type="submit">Buy Tickets</button>
     </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">BOOK</button>
+        <button type="submit" class="btn btn-secondary" data-dismiss="modal" onClick={() => {alert("Booking confirmed!");}}>BOOK</button>
         <button type="button" class="btn btn-primary">Cancel</button>
       </div>
     </div>

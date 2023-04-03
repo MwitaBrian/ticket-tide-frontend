@@ -1,16 +1,17 @@
 import React, { useState, useContext, useEffect} from 'react'
 import { EventsContext } from './context/EventContext';
 import Swal from "sweetalert2"
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
- 
+ const navigate = useNavigate()
     const access = sessionStorage.getItem("level");
 
   
   const { events } = useContext(EventsContext)
  
   const [data, setData] = useState({});
-
+const bookings = data.bookings;
 
   const last_name = data.last_name
   const first_name = data.first_name
@@ -25,8 +26,7 @@ function Profile() {
   function handleSubmit(e) {
     e.preventDefault();
     const id = sessionStorage.getItem('user_id')
-    console.log(first_name, last_name, email, phone, level, image)
-    fetch(`http://localhost:3000/users/${id}`, {
+    fetch(`https://ticket-rjnl.onrender.com/users/${id}`, {
       method: 'PATCH',
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +46,7 @@ function Profile() {
 const id = sessionStorage.getItem('user_id')
   // function userInfo() {
   useEffect(() => {
-    fetch(`http://localhost:3000/users/${id}`, {
+    fetch(`https://ticket-rjnl.onrender.com/users/${id}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -57,7 +57,7 @@ const id = sessionStorage.getItem('user_id')
 			.then((response) => {
         // console.log(response);
         setData(response)
-         console.log(response);
+        //  console.log(response);
 				// navigate('/profile')
 
 				// do something with the user info here
@@ -71,7 +71,7 @@ const id = sessionStorage.getItem('user_id')
 const [bryan, setBryan] = useState({})
   function showDetail(id) {
 
-    fetch(`http://localhost:3000/events/${id}`, {
+    fetch(`https://ticket-rjnl.onrender.com/events/${id}`, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
@@ -84,9 +84,52 @@ const [bryan, setBryan] = useState({})
       
   })
   }
+ function handleUserDelete() {
+  const id = sessionStorage.getItem('user_id');
+  
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "This action cannot be undone!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(`https://ticket-rjnl.onrender.com/users/${id}`, {
+        method: 'DELETE'
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.errors) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: data.errors,
+            });
+          } else {
+            // Clear session storage
+            sessionStorage.clear();
+            // Navigate to register page
+            window.location.replace('/register');
+          }
+        })
+        .catch(error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+          });
+        });
+    }
+  });
+}
+
+
   
 function handleDelete(id) {
-  fetch(`/events/${id}`, {
+  fetch(`https://ticket-rjnl.onrender.com/events/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -129,14 +172,15 @@ function handleDelete(id) {
   const contact = bryan.contact
  
   function handleUpdate(e) {
-     e.preventDefault();
+    e.preventDefault();
+    const id= bryan.id
     console.log({
       event_date, event_name, start_time, end_time, age_restriction,
       event_location, category, ticket_info, total_tickets, event_price,
       event_description, poster_url, lineup, contact
     })
  
-    fetch(`http://localhost:3000/events/${id}`, {
+    fetch(`https://ticket-rjnl.onrender.com/events/${id}`, {
       method: 'PATCH',
       headers: {
         "Content-Type": "application/json",
@@ -150,10 +194,44 @@ function handleDelete(id) {
     })
     .then(res=> res.json())
       .then(response => {
-      console.log(response)
+        console.log(response)
+        if (response.status === 'success') {
+            // show success message 
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Event updated Successfully!',
+                    showConfirmButton: false,
+                    timer: 1500
+                    })
+        } else {
+          Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Event could not be updated!',
+                  })
+        }
     })
 }
- 
+ const userId = sessionStorage.getItem('user_id');
+
+  
+  // fetch bookings where user id 
+ fetch(`https://ticket-rjnl.onrender.com/user/${userId}/bookings`, {
+  method: 'GET',
+  headers: {
+    "Content-Type": "application/json",
+    'Authorization': `Bearer ${sessionStorage.token}`
+  }
+})
+.then(res => res.json())
+.then(response => {
+  console.log(response)
+})
+.catch(error => {
+  console.error('Error:', error);
+});
+
     return (
       
         <div style={{ marginTop: "10vh" }}>
@@ -184,9 +262,10 @@ function handleDelete(id) {
                         id="last-name"
                         name='last_name'
      
-                        value={data.last_name}
+                        
                         onChange={(e) =>
                           setData({ ...data, last_name: e.target.value })}
+                        value={data.last_name}
     />
   </div>
   <div>
@@ -218,12 +297,13 @@ function handleDelete(id) {
       id="image"
                         name="image"
                        onChange={(e) =>
-													setData({ ...data, image: e.target.files[0] })}
+                         setData({ ...data, image: e.target.files[0] })}
+                        
     />
   </div>
   <div className='d-flex gap-4'>
     <button type='submit'>Update</button>
-    <button type='button' onClick={handleDelete}>Delete</button>
+    <button type='button' onClick={handleUserDelete}>Delete</button>
   </div>
 </form>
 
@@ -234,9 +314,9 @@ function handleDelete(id) {
                                     (
                                         <>
                       <div>
-                        <div className='d-flex'>
+                        <div className='d-flex gap-5'>
                           <h5>EVENTS</h5>
-                          <button>Create new bryan</button>
+                          <button type='button'>Create new bryan</button>
                         </div>
                         <div>
                           {events && events.map((bryan, index) => (
@@ -245,8 +325,10 @@ function handleDelete(id) {
                             <div>
                                 <p>{bryan.event_name}</p>
                                 <p>{bryan.event_date} {bryan.start_time}</p>
-                                <button type="button" onClick={(e) => showDetail(bryan.id)} class="btn btn-primary" data-toggle="modal" data-target="#bookModal"><i className='bi bi-pencil-square'></i></button>
+                                <div className='d-flex gap-5'>
+                                    <button type="button" onClick={(e) => showDetail(bryan.id)} className="btn btn-primary" data-toggle="modal" data-target="#bookModal"><i className='bi bi-pencil-square'></i></button>
                                 <button type='submit' onClick={(e)=> handleDelete(bryan.id)}><i className='bi bi-trash'></i></button>
+                                </div>
                             </div>
                             </card>
                              ))}
@@ -257,22 +339,35 @@ function handleDelete(id) {
                                         <>
                       <div>
                         <h5>my bookings</h5>
+
+                                        <div>
+      <h3>Bookings</h3>
+      {bookings && bookings.map(booking => (
+        <div key={booking.id}>
+          {/* <p>Event: {booking.event.event_name}</p> */}
+          <p>Tickets: {booking.tickets}</p>
+          <p>Total Price: {booking.total}</p>
+        </div>
+      ))}
+    </div>
+
+
                       </div> 
                                         </>
                                     )
                             }
                         </div>
             </div>
-            <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div className="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div className="modal-dialog modal-dialog-centered" role="document">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalLongTitle"></h5>
+        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div className="modal-body">
               	<form className='bryan-form m-1' onSubmit={handleUpdate}>
 					<div className='row'>
 						<div className='col-md-6'>
@@ -427,7 +522,7 @@ function handleDelete(id) {
 								<textarea
   id='lineup'
   className='form-control'
-  value={bryan.event_lineup}
+  value={bryan.lineup}
   onChange={(e) => setBryan({ ...bryan, event_lineup: e.target.value })}
 ></textarea>
 							</div>
@@ -436,16 +531,12 @@ function handleDelete(id) {
                       <button type='submit'>Update</button>
     </form>
       </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Update</button>
-        <button type="button" class="btn btn-primary">Cancel</button>
-      </div>
     </div>
   </div>
 </div>
                 </div>
             </div>
-             
+           
     </div>
    
   )

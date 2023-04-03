@@ -11,13 +11,14 @@ import New from './components/New';
 import Profile from './components/Profile';
 import AuthProvider from './components/context/AuthContext';
 import EventsProvider from './components/context/EventContext';
+import Create from './components/Create';
+import Message from './components/Message';
 
 
 
 function App() {
  
   return (
-
 		<BrowserRouter>
 			<AuthProvider>
 				<EventsProvider>
@@ -30,6 +31,8 @@ function App() {
 							<Route path='/details/:id' element={<Details />} />
 							<Route path='/new' element={<New />} />
 							<Route path='/profile' element={<Profile />} />
+							<Route path='/create' element={<Create />} />
+							<Route path='/message' element={<Message />} />
 						</Route>
 					</Routes>
 				</EventsProvider>

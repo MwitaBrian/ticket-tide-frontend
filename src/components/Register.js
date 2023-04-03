@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
-import { Link ,useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 
@@ -11,17 +12,15 @@ function Register() {
     const [lastName, setLastName] = useState('');
     const [phone, setPhone] = useState('');
   const [level, setLevel] = useState('user');
- 
-  // const { register } = useContext(AuthContext);
+
 // handle user signUp
   function handleSignUp(e) {
     e.preventDefault();
     const last_name = lastName
     const first_name = firstName
 
-    // register(email, password, first_name, last_name, phone);
-    // console.log(email, password, first_name, last_name, password)
-    fetch("/users", {
+
+    fetch(`https://ticket-rjnl.onrender.com/users`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -31,15 +30,39 @@ function Register() {
 				first_name,
 				phone,
 				email,
-        password,
-        level
+				password,
+				level,
 			}),
 		})
-			.then((response) => response.json())
-			.then((data) => {
-			navigate('/login')
+			.then((res) => res.json())
+      .then((response) => {
+        if (response.status === 'created') {
+					Swal.fire({
+						icon: "success",
+						title: "Thank you!",
+						text: "Event created successfully",
+						confirmButtonText: "OK",
+					});
+					// clear input fields
+					setLastName("");
+					setFirstName("");
+					setPhone("");
+					setEmail("");
+					setPassword("");
+					navigate("/login");
+				} else {
+          Swal.fire({
+						icon: "error",
+						title: "Oops...",
+						text: `There were some errors: ${response.error}`,
+						confirmButtonText: "OK",
+					});
+        }
+				
 			});
-    }
+
+  }
+
 
   return (
     <div className='hero pt-5'>
@@ -108,4 +131,4 @@ function Register() {
     </div>
   )
 }
-export default Register
+  export default Register;

@@ -39,7 +39,7 @@ function Register() {
 			.then((data) => {
 			navigate('/login')
 			});
-
+    }
 
   return (
     <div className='hero pt-5'>

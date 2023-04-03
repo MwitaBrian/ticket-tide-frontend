@@ -9,8 +9,8 @@
 }
 
 body {
-  /* max-width: 1024px; */
   margin: auto;
+  font-family: "Poppins", sans-serif;
 }
 
 
@@ -195,4 +195,18 @@ p {
   background-position: center;
   height: 65vh;
   margin-top: 60px;
+}
+.section-header {
+  position: relative;
+}
+.section-header::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: brown;
+  /* margin-right: 20px; */
 }

@@ -17,7 +17,7 @@ export default function AuthProvider({children})
 
     // login
     const login = (email, password) =>{
-        fetch("/login",{
+        fetch(`https://ticket-rjnl.onrender.com/login`,{
             method: "POST",
             headers:{
                 "Content-Type": "application/json"
@@ -46,7 +46,15 @@ export default function AuthProvider({children})
               setCurrentUser(response.user)
               sessionStorage.setItem('user_id', response.user.id)
                 // navigate to the home page
-                navigate("/");
+                // navigate("/");
+              const lastLocation = localStorage.getItem("lastLocation");
+				if (lastLocation) {
+          window.location.href = lastLocation;
+            localStorage.removeItem('lastLocation'); // remove lastLocation on successful login
+				} else {
+					window.location.href = "/";
+				}
+		
                 // show success message 
                 Swal.fire({
                     position: 'center',
@@ -66,56 +74,12 @@ export default function AuthProvider({children})
             }
         })
     }
-// const id = sessionStorage.getItem('user_id')
-//   function userInfo() {
-// 		fetch(`http://localhost:3000/users/${id}`, {
-// 			method: "GET",
-// 			headers: {
-// 				"Content-Type": "application/json",
-// 				Authorization: `Bearer ${sessionStorage.jwtToken}`,
-// 			},
-// 		})
-// 			.then((res) => res.json())
-// 			.then((response) => {
-//         console.log(response);
-//         setUser(response)
-// 				navigate('/profile')
-
-// 				// do something with the user info here
-// 			})
-// 			.catch((error) => console.error(error));
-// 	}
-  
-  
-  
-     // Register
-//    const register = (last_name, first_name, phone, email, password) =>{
-//     fetch("/users", {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({
-//         last_name,
-//         first_name,
-//         phone,
-//         email,
-//         password
-//       })
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//       console.log(data); // Update the state variable with the response data
-     
-//     })
-  
-// }
 
 // check logged in user
   const token = sessionStorage.getItem('token');
 
   useEffect(() => {
-    fetch("/loggedin", {
+    fetch(`https://ticket-rjnl.onrender.com/loggedin`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -124,7 +88,7 @@ export default function AuthProvider({children})
     })
       .then(res => res.json())
       .then(response => {
-        // setUser(response);
+        setUser(response);
       })
       .catch(error => console.error('Error:', error));
   }, [token]);

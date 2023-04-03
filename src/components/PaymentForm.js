@@ -8,14 +8,19 @@ const PaymentForm = ({ event }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch(`/events/${event.id}/payments`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      },
-      body: JSON.stringify({ payment: { amount, currency, description }})
-    });
+    const response = await fetch(
+			`https://ticket-rjnl.onrender.com/events/${event.id}/payments`,
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"X-CSRF-Token": document
+						.querySelector('meta[name="csrf-token"]')
+						.getAttribute("content"),
+				},
+				body: JSON.stringify({ payment: { amount, currency, description } }),
+			}
+		);
 
     if (response.ok) {
       // Payment created successfully

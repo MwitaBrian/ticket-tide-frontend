@@ -10,9 +10,9 @@ export default function EventsProvider({children})
     const [events, setEvents] = useState()
     const [change, setOnChange] = useState(false)
 
-    // Adding questions
+    // Adding events
     const addEvent = (event_name,event_date,event_location,event_description, poster_url,event_price,total_tickets,start_time,end_time,contact,age_restriction,ticket_info,lineup,category) =>{
-        fetch("/events",{
+        fetch(`https://ticket-rjnl.onrender.com/events`,{
             method: "POST",
             headers:{
                 "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export default function EventsProvider({children})
         )
         .then(res=>res.json())
         .then(response=>{
-            
+            console.log(response)
             if(response.errors)
             {
                  
@@ -37,7 +37,7 @@ export default function EventsProvider({children})
                         text: response.errors,
                     })
             }
-            else if(response.success)
+            else if(response.status==='created')
             {
                 Swal.fire({
                     position: 'center',
@@ -64,9 +64,9 @@ export default function EventsProvider({children})
     }
 
    
-    // Fetch questions
+    // Fetch events
     useEffect(()=>{
-        fetch("/events",{
+        fetch(`https://ticket-rjnl.onrender.com/events`,{
             method: "GET",
             headers:{
                 "Content-Type": "application/json"
@@ -87,10 +87,12 @@ export default function EventsProvider({children})
         }
         )
     }, [change])
+   
 
     const contextData = {
       events,
-      addEvent
+        addEvent,
+     
     //   
     }
 

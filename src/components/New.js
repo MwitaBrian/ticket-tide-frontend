@@ -159,15 +159,30 @@ function New() {
 								/>
 							</div>
 							<div className='form-group'>
-								<label htmlFor='contact'>Category:</label>
-								<input
-									type='text'
-									id='contact'
+								<label htmlFor='category'>Category:</label>
+								<select
+									id='category'
 									className='form-control'
 									value={eventCategory}
 									onChange={(e) => setEventCategory(e.target.value)}
-								/>
+								>
+									{[
+										"Concerts",
+										"Festivals",
+										"Parties",
+										"Meetups",
+										"Workshops",
+										"Music",
+										"Community",
+										"Other"
+									].map((category) => (
+										<option key={category} value={category}>
+											{category}
+										</option>
+									))}
+								</select>
 							</div>
+
 							<div className='form-group'>
 								<label htmlFor='ageRestriction'>Age Restriction:</label>
 								<input
@@ -178,7 +193,7 @@ function New() {
 									onChange={(e) => setAgeRestriction(e.target.value)}
 								/>
 							</div>
-						
+
 							<div className='form-group'>
 								<label htmlFor='ticketInfo'>Ticket Info:</label>
 								<textarea

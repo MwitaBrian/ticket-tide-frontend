@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import { NavLink ,useNavigate} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
-	// const navigate = useNavigate()
+	
 	
 	const [mobile, setMobile] = useState(false);
 	const { logout ,currentUser} = useContext(AuthContext);
@@ -15,7 +15,6 @@ function Navbar() {
 
 	return (
 		<div>
-
 			<nav
 				className='navbar'
 				style={{
@@ -34,11 +33,9 @@ function Navbar() {
 						onClick={() => setMobile(false)}
 					>
 						<NavLink exact activeClassName='active' to='/'>
-
-		  
 							<li>Home</li>
 						</NavLink>
-						<NavLink className='active' to='/events'>
+						<NavLink activeClassName='active' to='/events'>
 							<li>Events</li>
 						</NavLink>
 
@@ -53,8 +50,18 @@ function Navbar() {
 									<li>Create</li>
 								</NavLink>
 							</>
-						) : null}
-
+						) : (
+							<>
+								<NavLink
+									activeClassName='active'
+									className='mx-3'
+									style={{ background: "#1E90FF" }}
+									to='/create'
+								>
+									<li>Add Event</li>
+								</NavLink>
+							</>
+						)}
 
 						{isLoggedIn ? (
 							<>
@@ -77,8 +84,8 @@ function Navbar() {
 												border: "2px solid #fbfbff",
 												marginRight: "3px",
 											}}
-											src='https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'
-											alt='Alternative avatar'
+											src={currentUser.image}
+											alt='https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'
 										/>
 										{currentUser.last_name}
 									</a>
@@ -87,9 +94,7 @@ function Navbar() {
 										aria-labelledby='navbarDropdownMenuLink'
 									>
 										<a className='dropdown-item' href='/profile'>
-											<i class='bi bi-person-square'>
-												Profile
-											</i>
+											<i class='bi bi-person-square'>Profile</i>
 										</a>
 										<a
 											className='dropdown-item'
@@ -98,6 +103,13 @@ function Navbar() {
 										>
 											<i class='bi bi-door-closed-fill'> Logout</i>
 										</a>
+										{level === "admin" ? (
+											<>
+												<a className='dropdown-item' href='/message'>
+													<i class='bi bi-envelope'>Messages</i>
+												</a>
+											</>
+										) : null}
 									</div>
 								</li>
 							</>
@@ -108,7 +120,6 @@ function Navbar() {
 								</NavLink>
 							</>
 						)}
-
 					</ul>
 					<button
 						className='mobile-menu-icon'

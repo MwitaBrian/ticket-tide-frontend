@@ -60,7 +60,9 @@ function Register() {
         }
 				
 			});
+
   }
+
 
   return (
     <div className='hero pt-5'>

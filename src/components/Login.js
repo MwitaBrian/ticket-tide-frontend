@@ -22,7 +22,7 @@ function Login() {
 				<form onSubmit={handleSubmit}>
 					<h1>Login</h1>
 					<div>
-						<label htmlFor='username'>Username</label>
+						<label htmlFor='username'>Email</label>
 						<br />
 						<input
 							type='text'
@@ -62,6 +62,7 @@ function Login() {
 			</div>
 		</div>
 	);
+
 }
 
 export default Login;
